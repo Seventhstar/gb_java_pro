@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:id="pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.evgeny_k.lesson_2.client.Controller">
+
+    <VBox fx:id="allPanels" prefWidth="478.0" spacing="8" GridPane.rowIndex="1">
+        <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" VBox.vgrow="NEVER">
+            <TextField fx:id="login">
+                <HBox.margin>
+                    <Insets right="5.0"/>
+                </HBox.margin>
+            </TextField>
+
+            <TextField fx:id="password">
+                <HBox.margin>
+                    <Insets right="5.0"/>
+                </HBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#Authorize" text="Authorize">
+                <HBox.margin>
+                    <Insets right="5.0"/>
+                </HBox.margin>
+            </Button>
+            <Label fx:id="authLabel" text="Label"/>
+        </HBox>
+        <HBox styleClass="chatPanel" VBox.vgrow="ALWAYS">
+            <TextArea fx:id="allMessages" editable="false" promptText="Send the first message" styleClass="textArea" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+        </HBox>
+        <HBox spacing="4">
+            <TextField fx:id="newMessage" onAction="#sendMessage" promptText="Введите текст" HBox.hgrow="ALWAYS">
+                <HBox.margin>
+                    <Insets right="5.0" />
+                </HBox.margin>
+            </TextField>
+            <Button onAction="#sendMessage" text="Отправить" />
+        </HBox>
+    </VBox>
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints />
+    </rowConstraints>
+
+</GridPane>
