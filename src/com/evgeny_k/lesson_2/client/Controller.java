@@ -10,7 +10,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     private ServerService serverService;
@@ -22,6 +24,9 @@ public class Controller {
     public TextArea allMessages;
     public GridPane pane;
     public Label authLabel;
+    private String nick;
+    private String fileName;
+
 
     public Controller() {
         allMessages = new TextArea();
@@ -32,6 +37,7 @@ public class Controller {
             new Thread(() -> {
                 while (true) {
                     printToUI(allMessages, serverService.readMessages());
+
                 }
             }).start();
         }
@@ -68,12 +74,16 @@ public class Controller {
         String psw = password.getText();
         if (lgn != null && psw != null && !lgn.isEmpty() && !psw.isEmpty()) {
             try {
-                String nick = serverService.authorization(lgn, psw);
+                nick = serverService.authorization(lgn, psw);
                 isAuthorized = true;
                 authLabel.setText("Online, nick " + nick);
+                fileName = "history_" + nick + ".txt";
+                getHistory();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             new Thread(() -> {
                 while (true) {
                     printToUI(allMessages, serverService.readMessages());
@@ -84,7 +94,67 @@ public class Controller {
 
     private void printToUI(TextArea chat, Message message) {
         chat.appendText("\n");
-        chat.appendText((message.getNick() != null ? message.getNick() : "Сервер") + " написал: " + message.getMessage());
+        String msg = message.getMessage();
+        if (msg != null) {
+            String stringMessage = (message.getNick() != null ? message.getNick() : "Сервер") + " написал: " + msg;
+            chat.appendText(stringMessage);
+            try {
+                saveToHistory(stringMessage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void getHistory() {
+        try {
+            FileReader fileReader = new FileReader(fileName);
+            try (BufferedReader reader = new BufferedReader(fileReader)) {
+                String line;
+                ArrayList<String> lines = new ArrayList<>();
+
+                while ((line = reader.readLine()) != null) {
+                    lines.add(line);
+                }
+
+                int linesCount = lines.size();
+                int start = linesCount > 100 ? linesCount - 100 : 0;
+
+                new Thread(() -> {
+                    for (int i = start; i < lines.size(); i++) {
+                        System.out.println("i = " + i + " = " + lines.get(i));
+                        allMessages.appendText(lines.get(i) + "\n");
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+
+            } catch (IOException | NullPointerException | ArrayIndexOutOfBoundsException e) {
+                System.out.println("вот тут упали");
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveToHistory(String message) throws IOException {
+        try {
+            File historyFile = new File(fileName);
+            if (!historyFile.exists()) {
+                historyFile.createNewFile();
+            }
+
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
+            bufferWriter.write("\n" + message);
+            bufferWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
