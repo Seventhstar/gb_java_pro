@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.evgeny_k.lesson_2.client.Controller">
+<GridPane fx:id="pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.evgeny_k.Chat.client.Controller">
 
     <VBox fx:id="allPanels" prefWidth="478.0" spacing="8" GridPane.rowIndex="1">
         <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" VBox.vgrow="NEVER">

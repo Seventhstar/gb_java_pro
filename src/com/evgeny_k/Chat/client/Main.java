@@ -1,4 +1,4 @@
-package com.evgeny_k.lesson_2.client;
+package com.evgeny_k.Chat.client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

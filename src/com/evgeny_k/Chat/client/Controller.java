@@ -1,6 +1,6 @@
-package com.evgeny_k.lesson_2.client;
+package com.evgeny_k.Chat.client;
 
-import com.evgeny_k.lesson_2.server.Message;
+import com.evgeny_k.Chat.server.Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -8,11 +8,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controller {
     private ServerService serverService;

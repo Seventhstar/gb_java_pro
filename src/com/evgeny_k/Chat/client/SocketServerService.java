@@ -1,9 +1,9 @@
-package  com.evgeny_k.lesson_2.client;
+package com.evgeny_k.Chat.client;
 
 import com.google.gson.Gson;
-import com.evgeny_k.lesson_2.server.AuthMessage;
-import com.evgeny_k.lesson_2.server.Message;
-import com.evgeny_k.lesson_2.server.MyServer;
+import com.evgeny_k.Chat.server.AuthMessage;
+import com.evgeny_k.Chat.server.Message;
+import com.evgeny_k.Chat.server.MyServer;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

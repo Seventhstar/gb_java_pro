@@ -1,4 +1,4 @@
-package  com.evgeny_k.lesson_2.server;
+package com.evgeny_k.Chat.server;
 
 public class AuthMessage {
     private String login;

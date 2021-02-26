@@ -1,6 +1,7 @@
-package com.evgeny_k.lesson_2.client;
+package com.evgeny_k.Chat.client;
 
-import com.evgeny_k.lesson_2.server.Message;
+import com.evgeny_k.Chat.server.Message;
+
 import java.io.IOException;
 
 public interface ServerService {
